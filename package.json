@@ -1,0 +1,32 @@
+{
+  "name": "myfunds1",
+  "version": "1.0.0",
+  "description": "funds manager",
+  "main": "mfserver.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "fs": "^0.0.1-security",
+    "mongodb": "^3.6.3",
+    "path": "^0.12.7",
+    "socket.io": "^3.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheoKarld/myfunds1.git"
+  },
+  "keywords": [
+    "adashe",
+    "funds",
+    "manage"
+  ],
+  "author": "KARLDWORLD",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TheoKarld/myfunds1/issues"
+  },
+  "homepage": "https://github.com/TheoKarld/myfunds1#readme"
+}
