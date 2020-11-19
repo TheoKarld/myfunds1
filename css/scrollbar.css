@@ -1,2 +1,4 @@
 ::-webkit-scrollbar {width: 6px;margin: 0 8px;}
 ::-webkit-scrollbar-thumb {background-color:#fff5e8;background-clip: content-box;border: 1px solid #cabb6f;border-radius:.15em;}
+#kwpower,#kwp-h6 {-webkit-margin-before:0;-webkit-margin-after:0;text-align:right;font:14px arial;;text-decoration:underline;}
+#kwpower {position:fixed;width:100%;background:white;}

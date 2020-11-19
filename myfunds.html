@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang='en'>
 <head>
-<link rel='icon' href='img/logo2.png' />
+<link rel='icon' href='img/icon1.png' />
 <link rel='stylesheet' type='text/css' href='css/scrollbar.css' />
 <meta charset='UTF-8'>
 <meta http-equiv='X-UA-Compatible' content='IE-edge'>
@@ -12,13 +12,39 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script type='text/javascript' src='js/basic.boot.js'></script>
 <script type='text/javascript' src='js/ffo.js'></script>
-<script type='text/javascript' src='socket.js'></script>
+<script type='text/javascript' src='/socket.io/socket.io.js'></script>
 <script type='text/javascript'>
+var VP=DIV('viewpoint','container'),Mng=false,socket=io(),name='MyFunds',version='0.0.1',moto='Realtime funds management',bod='',sor=scren(),la=['group name','security pass','individual amount','collector','year','month','members','funds','backup'],mns=['January','February','March','April' ,'May','June','July','August','September','October','November','December'],ma=['current funds','loans','payments','complete'],al=['launched','organisation','year','month','groups'],mea=['Name','contact','address'],loa=['reciever','amount','date','paid','date paid'],cma=['reciever','amount recieved','date recieved'];
 
+addEvent(window,'load',function(){
+	body=document.body;
+	APP(body,kwp());
+	APP(body,VP);
+	fit2scrn(VP);
+	ffo.gear();
+	myEditor(ebt('style')[0],body);
+	
+});
 
 </script>
 <style type='text/css'>
-
+#newreg,#logob {padding:1em;overflow:hidden;width:80%;margin:auto;margin-top:1em;background:#f5f5ff;}
+#newreg-hd {width:100%;}
+#logo1-p,#log-ip,#nwgrp-ip {margin:auto;max-width:14em;}
+#logo1,#log-i,#nwgrp-im {width:100%;}
+#new-h1 {text-align:center;font:90px normal;}
+#new-p {font:17px normal}
+#new-inp {font:20px arial;padding:2em;}
+#login-hd,#newgrp-hd {background:url(img/ban.png);background-size:100% 100%;padding:1em;color:white;text-align:center;margin-top:0;}
+#logob {padding:0;}
+#log-ips {padding:.5em;}
+#log-ips input {margin-bottom:1em;font:19.8px normal;padding:1.7em;}
+#log-bgrp .btn,#nwgrp-bg .btn {border-radius:0;margin-left:.3em;font:16px arial;padding-left:3em;}
+#log-bgrp .btn span {margin-left:.3em;}
+#newgroup {background:#f5f5ff;margin-top:1em;padding:0;}
+#nwgrp-h3 {margin:0;}
+#newgroup #phul input {margin-bottom:1.5em;padding:2em;font:19px normal;}
+#nwgrp-bg {margin-left:.5em;margin-bottom:1em;}
 </style>
 </head>
 <body>
