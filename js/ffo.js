@@ -100,7 +100,7 @@ var logob=function(){
 	
 }
 var newreg=function(){
-	var ik=input('new-inp','form-control',{'placeholder':'name of Organisation'}),hd=pah('newreg-hd',[par([img('img/logo1.png','logo1')],'logo1-p'),par([hea(1,'Welcome','new-h1')])]),ws=colbox('newreg-ws',12,12,12,12,[par([par('Please fill in the Organisation name field to launch.','new-p'),par([ik],'new-ip')],'neworg-p'),par([but('Launch','button','lnchkey','btn btn-lg btn-primary')],'newbtn-p')]),rd=jum('newreg',[kwp(),hd,ws]);
+	var ik=input('new-inp','form-control',{'placeholder':'name of Organisation'}),hd=pah('newreg-hd',[par([img('img/logo1.png','logo1')],'logo1-p'),par([hea(1,'Welcome','new-h1')])]),ws=colbox('newreg-ws',12,12,12,12,[par([par('Please fill in the Organisation name field to launch.','new-p'),par([ik],'new-ip')],'neworg-p'),par([but('Launch','button','lnchkey','btn btn-lg btn-primary')],'newbtn-p')]),rd=jum('newreg',[hd,ws]);
 	ffo.nwrg=rd;
 	
 	
