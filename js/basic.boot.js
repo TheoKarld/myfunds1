@@ -658,11 +658,13 @@ var rar=function(a,c){
 var kwp=function(){
 	return par([hea(6,'Powered by: KARLDWORLD.','kwp-h6')],'kwpower');
 }
-var phul=function(ar){
-	var ul=jum('phul'),b={},c,eo={};addclass(ul,'form');
+var phul=function(ar,ra){
+	var ul=jum('phul'),b={},c,eo={},d,v;addclass(ul,'form');
 	for(var i in ar){
+		v=(ra&&ra[i])?ra[i]:'';
 		c=input(ar[i],'form-control',{placeholder:ar[i]});
-		APP(ul,c);
+		d=par([c,small(v)])
+		APP(ul,d);
 		b[ar[i]]=c;
 	}
 	eo.e=ul;

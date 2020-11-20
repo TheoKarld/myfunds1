@@ -53,12 +53,19 @@ function callnwgrp(){
 
 
 var newgroup=function(){
-	var ul=phul(ga),hd=pah('newgrp-hd',[par([img('img/logo1.png','nwgrp-im')],'nwgrp-ip'),par([hea(1,[icon('home'),hea(3,'create new group','nwgrp-h3')])])]),nk=but([icon('tright'),span('next')],'button','gnxtkey','btn btn-lg btn-primary'),ck=but([icon('ok'),span('continue')],'button','gconkey','btn btn-lg btn-success'),ws=jum('nwgrp-ws',[ul.e]),bg=par([butgroup('lg',[nk,ck],'nwgrp-bg')],'nwgrp-bp'),rd=jum('newgroup',[hd,ws,bg]),mu=jum('nwgrp-mu'),bc='',up='',md=jum('nwgrp-md',[pah('nwgrp-mhd',[par([img('img/icon1.png','nwgrp-im')]),par([hea(1,[icon('pencil'),hea(2,'fill in names and phone numbers')],'nwgrp-mh')])]),mu,butgroup('lg',[ck,but([icon(),span('cancel')],'button','nwxmem','btn btn-lg btn-danger')])]);
+	var ul=phul(ga,['insert full group name','please choose a secure security pass, as it will be used to access the group.','amount must be in numbers.(NB. do not add comma, eg. 5000 not 5,000).','name of person responsible for collecting the funds','number of group members.']),hd=pah('newgrp-hd',[par([img('img/logo1.png','nwgrp-im')],'nwgrp-ip'),par([hea(1,[icon('home'),hea(3,'create new group','nwgrp-h3')])])]),nk=but([icon('tright'),span('next')],'button','gnxtkey','btn btn-lg btn-primary'),ck=but([icon('ok'),span('continue')],'button','gconkey','btn btn-lg btn-success'),ws=jum('nwgrp-ws',[ul.e]),bg=par([butgroup('lg',[nk,but([icon('remove'),span('cancel')],'button','nwxgrp','btn btn-lg btn-danger')],'nwgrp-bg')],'nwgrp-bp'),rd=jum('newgroup',[hd,ws,bg]),mu=jum('nwgrp-mu'),bc='',up='',md=jum('nwgrp-md',[pah('nwgrp-mhd',[par([img('img/icon1.png','nwgrp-im')]),par([hea(1,[icon('pencil'),hea(2,'fill in names and phone numbers')],'nwgrp-mh')])]),mu,butgroup('lg',[ck,but([icon('remove'),span('cancel')],'button','nwxmem','btn btn-lg btn-danger')])]);
 	ffo.nwgrp=rd;
 	
-	swk();
 	
 	
+	function wipe(){
+		clrvalu(ul.o);
+		
+	}
+	function xme(){
+		wipe();
+		callogin();
+	}
 	function chk4flip(){
 		var ed=chkvalues(ul.o),ou='';
 		if(ed.e){alert('please insert '+ed.f);return;}
@@ -78,9 +85,13 @@ var newgroup=function(){
 	}
 	
 	
+	addEvent(rd,'keydown',function(e){
+		e=e.code;
+		if(e=='Escape')xme();
+	});
 	addEvent(rd,'click',function(e){
 		e=ee(e);
-		
+		if(e.id=='nwxgrp'||fada(e).id=='nwxgrp')xme();
 		if(e.id=='gnxtkey'||fada(e).id=='gnxtkey')chk4flip();
 	});
 	
