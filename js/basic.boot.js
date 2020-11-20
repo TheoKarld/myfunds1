@@ -663,7 +663,7 @@ var phul=function(ar,ra){
 	for(var i in ar){
 		v=(ra&&ra[i])?ra[i]:'';
 		c=input(ar[i],'form-control',{placeholder:ar[i]});
-		d=par([c,small(v)])
+		d=par([c,span(v)])
 		APP(ul,d);
 		b[ar[i]]=c;
 	}
