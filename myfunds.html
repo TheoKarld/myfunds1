@@ -14,7 +14,7 @@
 <script type='text/javascript' src='js/ffo.js'></script>
 <script type='text/javascript' src='/socket.io/socket.io.js'></script>
 <script type='text/javascript'>
-var VP=DIV('viewpoint','container'),Mng=false,socket=io(),name='MyFunds',version='0.0.1',moto='Realtime funds management',bod='',sor=scren(),la=['group name','security pass','individual amount','collector','year','month','members','funds','backup'],mns=['January','February','March','April' ,'May','June','July','August','September','October','November','December'],ma=['current funds','loans','payments','complete'],al=['launched','organisation','year','month','groups'],mea=['Name','contact','address'],loa=['reciever','amount','date','paid','date paid'],cma=['reciever','amount recieved','date recieved'];
+var VP=DIV('viewpoint','container'),Mng=false,socket=io(),name='MyFunds',version='0.0.1',moto='Realtime funds management',bod='',sor=scren(),la=['group name','security pass','individual target','collector','year','month','members','funds','backup'],mns=['January','February','March','April' ,'May','June','July','August','September','October','November','December'],ma=['available funds','loans','payments','complete'],al=['launched','organisation','year','month','groups'],mea=['Name','contact','address'],loa=['reciever','amount','date','paid','date paid'],cma=['reciever','amount recieved','date recieved'];
 
 addEvent(window,'load',function(){
 	body=document.body;
@@ -40,15 +40,31 @@ addEvent(window,'load',function(){
 #login-hd,#newgrp-hd {background:url(img/ban.png);background-size:100% 100%;padding:1em;color:white;text-align:center;margin-top:0;}
 #logob {padding:0;}
 #log-ips {padding:.5em;}
-#log-ips input {margin-bottom:1em;font:19.8px normal;padding:1.7em;}
+#log-ips input {margin-bottom:1em;font:16px normal;padding:1.7em;}
 #log-bgrp .btn,#nwgrp-bg .btn {border-radius:0;margin:.04em;font:16px arial;padding-left:3em;}
 #log-bgrp .btn span {margin-left:.3em;}
 #newgroup {background:#f5f5ff;margin-top:1em;padding:0;}
 #nwgrp-h3 {margin:0;}
-#newgroup #phul input {margin-top:1.5em;padding:2em;font:19px normal;}
+#newgroup #phul input {margin-top:1.5em;padding:2em;font:16px normal;}
 #nwgrp-bg {margin-left:.5em;margin-bottom:1em;width:100%;}
 #newgroup #phul span {font:14px normal;margin-left:.5em;color:#666;}
 #phul {padding:1.5em;}
+#anoucer {position:absolute;margin:auto;left:0;right:0;top:0;bottom:0;background:#fff9d9;width:90%;height:15em;padding:1em;}
+#anotj {background:white;}
+#anop {text-indent:1em;font:14.5px arial;padding:1em;color:#002f31}
+#groupdv {background:#fff9d9;padding:0;overflow-x:hidden;margin-top:1em;}
+#group-hd {background:url(img/ban2.png);background-size:100% 100%;padding:1em;width:100%;overflow:hidden;-webkit-margin-before:0;-webkit-margin-after:0;}
+#group-lim {width:100%;}
+#group-lp {width:4em;padding-left:1em;display:inline-block;}
+#group-com {font:20px normal;display:inline-block;color:white;}
+#group-ws {background:transparent;padding:1em;}
+#hmov1-jm {background:#ffa500;color:white;}
+#hmov1-jm p {display:inline-block;}
+#hmov1-jm .hmot {font:14.5px arial;}
+#hmov1-jm .hmov {font:19px arial;text-indent:.5em;}
+#hmov1-jm .row {margin-right:1em}
+#hmov1-jm .col {margin-left:1em;}
+#hmov1-jm #hmott,#mendem .mbspan {margin-left:.2em;}
 </style>
 </head>
 <body>

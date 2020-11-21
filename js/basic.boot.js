@@ -1,4 +1,4 @@
-var A1=['lg','md','sm','xs'],ICN={'film':'glyphicon glyphicon-film','tele':'glyphicon glyphicon-phone-alt','trash':'glyphicon glyphicon-trash',settings:'glyphicon glyphicon-cog',wrench:'glyphicon glyphicon-wrench',tright:'glyphicon glyphicon-triangle-right',voption:'glyphicon glyphicon-option-horizontal',hoption:'glyphicon glyphicon-option-horizontal',off:'glyphicon glyphicon-off',save:'glyphicon glyphicon-save',pencil:'glyphicon glyphicon-pencil',tower:'glyphicon glyphicon-tower',ok:'glyphicon glyphicon-ok',cok:'glyphicon glyphicon-ok-circle',plus:'glyphicon glyphicon-plus',user:'glyphicon glyphicon-user',folder:'glyphicon glyphicon-folder-close',home:'glyphicon glyphicon-home',remove:'glyphicon glyphicon-remove'},ftx='Click on the pencil icon to modify any company information, any change made can be undone by simply clicking on the pencil again. Please not you can\'t exit without saving all changes.';
+var A1=['lg','md','sm','xs'],ICN={'film':'glyphicon glyphicon-film','tele':'glyphicon glyphicon-phone-alt','trash':'glyphicon glyphicon-trash',settings:'glyphicon glyphicon-cog',wrench:'glyphicon glyphicon-wrench',tright:'glyphicon glyphicon-triangle-right',voption:'glyphicon glyphicon-option-horizontal',hoption:'glyphicon glyphicon-option-horizontal',off:'glyphicon glyphicon-off',save:'glyphicon glyphicon-save',pencil:'glyphicon glyphicon-pencil',tower:'glyphicon glyphicon-tower',ok:'glyphicon glyphicon-ok',cok:'glyphicon glyphicon-ok-circle',plus:'glyphicon glyphicon-plus',user:'glyphicon glyphicon-user',folder:'glyphicon glyphicon-folder-close',home:'glyphicon glyphicon-home',remove:'glyphicon glyphicon-remove',edit:'glyphicon glyphicon-edit',ques:'glyphicon glyphicon-question-sign',check:'glyphicon glyphicon-check',handup:'glyphicon glyphicon-hand-up',thumbsup:'glyphicon glyphicon-thumbs-up',cloudupload:'glyphicon glyphicon-cloud-upload',tent:'glyphicon glyphicon-tent',leaf:'glyphicon glyphicon-leaf',refresh:'glyphicon glyphicon-refresh',record:'glyphicon glyphicon-record',copy:'glyphicon glyphicon-copy',paste:'glyphicon glyphicon-paste',screenshot:'glyphicon glyphicon-screenshot'},ftx='Click on the pencil icon to modify any company information, any change made can be undone by simply clicking on the pencil again. Please not you can\'t exit without saving all changes.';
 
 //ethnocentric
 
@@ -29,7 +29,7 @@ function clg(t){
 function DIV(id,c,at,cl){
 	var rd=$$$('div',id,c);attme(rd,at);
 	
-	if(cl)for(var i in cl)APP(rd,cl[i]);
+	if(cl)feedme(rd,cl);
 	return rd;
 }
 function APP(p,c){
@@ -187,6 +187,58 @@ function swdot(dt){
 	if(dt=='....')r='.....';
 	if(dt=='.....')r='.';
 	return r;
+}
+function validate(ul,at,fnc){
+	var vali=true;
+	for(var i in ul){
+		if(!ul[i].value){
+			redtxt(at[i],('insert '+i));
+			if(vali)vali=false;
+		}
+	}
+	fnc(vali);
+}
+function resetkeys(r,am){
+	for(var i in r)if(r[i].textContent!=am[i]){r[i].textContent=am[i];r[i].style.color='';}
+		
+}
+function redtxt(el,tx){
+	el.textContent=tx;el.style.color='red';
+}
+function barme(t){
+	if(!t)return;
+	var k=unbar(t),s=k,a=[],x,y,cx=s.length,st='';
+	if(s.length<4)return s;
+	for(var i=0;i<cx;i++){
+		a.unshift(s.slice(s.length-3,s.length));
+		s=s.slice(0,s.length-3);
+		if(s.length<4){a.unshift(s);break;}
+	}
+	for(var i in a){st+=(a[i]+',');}
+	st=st.slice(0,st.length-1);
+	return st;
+	
+}
+function unbar(t){
+	if(!t)return;
+	var x=t,r='';
+	x=x.replace('N','');
+	x=x.split(',');
+	for(var i in x){
+		r+=x[i];
+	}
+	return r;
+}
+function isbar(v){
+	return parseInt(unbar(v));
+}
+function b2a(a,b){
+	for(var i in a)if(b[i])a[i]=b[i];
+}
+
+function ebmail(e){
+	//if(!)return false;
+	return (e.indexOf('@')>-1&&(e.split('@')[1].split('.'))[1])?true:false;
 }
 
 
@@ -656,21 +708,47 @@ var rar=function(a,c){
 	return b;
 }
 var kwp=function(){
-	return par([hea(6,'Powered by: KARLDWORLD.','kwp-h6')],'kwpower');
+	return par([hea(6,'Powered by: KARLDWORLD(C9).','kwp-h6')],'kwpower');
 }
-var phul=function(ar,ra){
-	var ul=jum('phul'),b={},c,eo={},d,v;addclass(ul,'form');
+var phul=function(ar,ra,as){
+	var ul=jum('phul'),b={},c,eo={},f={},d,v,k,s;addclass(ul,'form');
 	for(var i in ar){
 		v=(ra&&ra[i])?ra[i]:'';
-		c=input(ar[i],'form-control',{placeholder:ar[i]});
-		d=par([c,span(v)])
+		k=(as&&as[i])?as[i]:'text';
+		c=input(ar[i],'form-control',{placeholder:ar[i],type:k});
+		s=span(v);
+		d=par([c,s],'','form-group')
 		APP(ul,d);
 		b[ar[i]]=c;
+		f[ar[i]]=s;
 	}
 	eo.e=ul;
 	eo.o=b;
+	eo.a=f;
 	return eo;
 }
-
+var eform=function(a,id,c,at){
+	var rd=$$$('form',id,c,at,a);
+	return rd;
+	
+}
+var efgrup=function(a,id,c,at){
+	var rd=DIV(id,'form-group',at,a);
+	return rd;
+}
+var date=function(r){
+	var o=new Date(),v;
+	if(r=='f')v=o.toUTCString();
+	if(r=='m')v=o.getMonth();
+	if(r=='y')v=o.getFullYear();
+	if(r=='dt')v=o.getDate();
+	if(r=='dy')v=o.getDay();
+	if(r=='do')v=o;
+	if(r=='h')v=o.getHours();
+	if(r=='mn')v=o.getMinutes();
+	if(r=='s')v=o.getSeconds();
+	
+	return v;
+}
 
 

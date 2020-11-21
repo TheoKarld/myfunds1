@@ -1,4 +1,4 @@
-var version='0.0.1',name='MyFunds',port=process.env.PORT||9999,mongo=require('mongodb'),MongoClient=mongo.MongoClient,uri="mongodb+srv://myfunfs:DgpArwtmZysmZTGS@cluster0.31eaj.mongodb.net",url='mongodb://127.0.0.1:27017',dbn='myfunds1',CL='',ADM='',fs=require('fs'),express=require('express'),app=express(),server=app.listen(port,calldb),io=require('socket.io')(server),path=require('path'),db='',_dirname=path.resolve(),ll='',ids=['admindl','groupob'],la=['individual amount','collector','year','month','members','funds','backup'],mns=['January','February','March','April' ,'May','June','July','August','September','October','November','December'],ma=['current funds','loans','payments','complete'],al=['launched','organisation','year','month','groups'],mea=['Name','contact','address'],loa=['reciever','amount','date','paid','date paid'],cma=['reciever','amount recieved','date recieved'],FI='';
+var version='0.0.1',name='MyFunds',port=process.env.PORT||9999,mongo=require('mongodb'),MongoClient=mongo.MongoClient,uri="mongodb+srv://myfunfs:DgpArwtmZysmZTGS@cluster0.31eaj.mongodb.net",url='mongodb://127.0.0.1:27017',dbn='myfunds1',CL='',ADM='',fs=require('fs'),express=require('express'),app=express(),server=app.listen(port,calldb),io=require('socket.io')(server),path=require('path'),db='',_dirname=path.resolve(),ll='',ids=['admindl','groupob'],la=['group name','security pass','individual target','collector','year','month','members','funds','backup'],mns=['January','February','March','April' ,'May','June','July','August','September','October','November','December'],ma=['available funds','loans','payments','reciever','complete'],al=['launched','organisation','year','month','groups'],mea=['Name','contact','address'],loa=['reciever','amount','date','paid','date paid'],cma=['reciever','amount recieved','date recieved'],FI='',ga=['group name','security pass','individual target','collector'];
 
 
 app.use(express.static(_dirname));
@@ -23,12 +23,13 @@ var date=function(r){
 	return v;
 }
 var groupob=function(){
-	var o={},y=date('y'),a=la;o.fid=ids[1];for(var i=0;i<ocn(a);i++)o[a[i]]=(i==3||i==4||i==5)?{}:'';
-	o[a[4]][y]={};for(var i in mns)o[a[4]][y][mns[i]]=mntob();
+	var o={},y=date('y'),a=la;o.fid=ids[1];for(var i=0;i<ocn(a);i++)o[a[i]]=(i==6||i==7||i==8)?{}:'';
+	o[a[4]]=y;o[a[5]]=date('m');
+	o[a[7]][y]={};for(var i in mns)o[a[7]][y][mns[i]]=mntob();
 	return o;
 }
 var mntob=function(){
-	var o={};o[ma[0]]='';o[ma[1]]={};return o;
+	var o={};for(var i=0;i<ocn(ma);i++)o[ma[i]]=(i==0||i==3)?'':{};return o;
 }
 var memob=function(o){
 	var d={};d[mea[0]]=o.n;d[mea[1]]=o.c;return d;
@@ -46,7 +47,20 @@ var mrgar=function(a,b){
 
 
 
-
+function writelog(o){
+	if(o=='ll'&&ll)replace(ADM,'fid',ids[0],ll);
+}
+function b2a(a,b){
+	for(var i in a)if(b[i])a[i]=b[i];
+}
+function addgroup(o){
+	if(!ll)return;
+	var a=groupob(),nm=o[la[0]];
+	b2a(a,o);
+	ll[al[4]][nm]=a;
+	//writelog('ll');
+	clg(ll);
+}
 function edey(l){
 	return fs.existsSync(l);
 }
@@ -58,7 +72,7 @@ function mkdir(d){
 	fs.mkdir(d,incall);
 }
 function calldb(){
-	MongoClient.connect(uri,{useNewUrlParser:true,useUnifiedTopology:true},function(err,plug){
+	MongoClient.connect(url,{useNewUrlParser:true,useUnifiedTopology:true},function(err,plug){
 		if(err){
 			clg('error call');
 			clg(err);
@@ -75,7 +89,6 @@ function kickll(og){
 	if(!ADM)return;
 	var a=al;
 	ll=adminob();ll[a[0]]=date('f');ll[a[1]]=og;ll[a[2]]=date('y');ll[a[3]]=mns[date('m')];
-	clg(ll);
 	//putincol(ADM,ll);
 	
 }
@@ -187,6 +200,16 @@ socket.on('neworg',function(co){
 	var o={};o.l=ll;
 	socket.emit('kick',o);
 });
+socket.on('newgroup',function(co){
+	addgroup(co);
+	var o={};o.g=ll[al[4]];o.k=co[la[0]];o.s=co[la[1]];
+	socket.emit('groupadd',o);
+	
+});
+
 
 
 });
+
+
+
