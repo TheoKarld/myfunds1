@@ -376,7 +376,8 @@ function callog(){
 }
 function barme(t){
 	if(!t)return;
-	var k=unbar(t),s=k,a=[],x,y,cx=s.length,st='';
+	
+	var v=(typeof t=='string')?t:t.toString(),k=unbar(v),s=k,a=[],x,y,cx=s.length,st='';
 	if(s.length<4)return s;
 	for(var i=0;i<cx;i++){
 		a.unshift(s.slice(s.length-3,s.length));
@@ -390,7 +391,7 @@ function barme(t){
 }
 function unbar(t){
 	if(!t)return;
-	var x=t,r='';
+	var v=(typeof t=='string')?t:t.toString(),x=v,r='';
 	x=x.replace('N','');
 	x=x.split(',');
 	for(var i in x){
