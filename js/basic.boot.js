@@ -1,4 +1,4 @@
-var A1=['lg','md','sm','xs'],ICN={'film':'glyphicon glyphicon-film','tele':'glyphicon glyphicon-phone-alt','trash':'glyphicon glyphicon-trash',settings:'glyphicon glyphicon-cog',wrench:'glyphicon glyphicon-wrench',tright:'glyphicon glyphicon-triangle-right',voption:'glyphicon glyphicon-option-horizontal',hoption:'glyphicon glyphicon-option-horizontal',off:'glyphicon glyphicon-off',save:'glyphicon glyphicon-save',pencil:'glyphicon glyphicon-pencil',tower:'glyphicon glyphicon-tower',ok:'glyphicon glyphicon-ok',cok:'glyphicon glyphicon-ok-circle',plus:'glyphicon glyphicon-plus',user:'glyphicon glyphicon-user',folder:'glyphicon glyphicon-folder-close',home:'glyphicon glyphicon-home',remove:'glyphicon glyphicon-remove',edit:'glyphicon glyphicon-edit',ques:'glyphicon glyphicon-question-sign',check:'glyphicon glyphicon-check',handup:'glyphicon glyphicon-hand-up',thumbsup:'glyphicon glyphicon-thumbs-up',cloudupload:'glyphicon glyphicon-cloud-upload',tent:'glyphicon glyphicon-tent',leaf:'glyphicon glyphicon-leaf',refresh:'glyphicon glyphicon-refresh',record:'glyphicon glyphicon-record',copy:'glyphicon glyphicon-copy',paste:'glyphicon glyphicon-paste',screenshot:'glyphicon glyphicon-screenshot'},ftx='Click on the pencil icon to modify any company information, any change made can be undone by simply clicking on the pencil again. Please not you can\'t exit without saving all changes.';
+var A1=['lg','md','sm','xs'],ICN={'film':'glyphicon glyphicon-film','tele':'glyphicon glyphicon-phone-alt','trash':'glyphicon glyphicon-trash',settings:'glyphicon glyphicon-cog',wrench:'glyphicon glyphicon-wrench',tright:'glyphicon glyphicon-triangle-right',voption:'glyphicon glyphicon-option-horizontal',hoption:'glyphicon glyphicon-option-horizontal',off:'glyphicon glyphicon-off',save:'glyphicon glyphicon-save',pencil:'glyphicon glyphicon-pencil',tower:'glyphicon glyphicon-tower',ok:'glyphicon glyphicon-ok',cok:'glyphicon glyphicon-ok-circle',plus:'glyphicon glyphicon-plus',user:'glyphicon glyphicon-user',folder:'glyphicon glyphicon-folder-close',home:'glyphicon glyphicon-home',remove:'glyphicon glyphicon-remove',edit:'glyphicon glyphicon-edit',ques:'glyphicon glyphicon-question-sign',check:'glyphicon glyphicon-check',handup:'glyphicon glyphicon-hand-up',thumbsup:'glyphicon glyphicon-thumbs-up',cloudupload:'glyphicon glyphicon-cloud-upload',tent:'glyphicon glyphicon-tent',leaf:'glyphicon glyphicon-leaf',refresh:'glyphicon glyphicon-refresh',record:'glyphicon glyphicon-record',copy:'glyphicon glyphicon-copy',paste:'glyphicon glyphicon-paste',screenshot:'glyphicon glyphicon-screenshot',asterisk:'glyphicon glyphicon-asterisk',cloud:'glyphicon glyphicon-cloud',book:'glyphicon glyphicon-book',infosign:'glyphicon glyphicon-info-sign',calender:'glyphicon glyphicon-calender',comment:'glyphicon glyphicon-comment',stats:'glyphicon glyphicon-stats',alerti:'glyphicon glyphicon-alert',savefile:'glyphicon glyphicon-save-file'},ftx='Click on the pencil icon to modify any company information, any change made can be undone by simply clicking on the pencil again. Please not you can\'t exit without saving all changes.',upa={action:'fileupload',method:'post',enctype:'multipart/form-data',finp:{type:'file',name:'filetoupload'}};
 
 //ethnocentric
 
@@ -73,7 +73,7 @@ function clrval(eo){
 }
 function capname(n){
 	if(n.length==1)return n.toUpperCase();
-	var a=(n.charAt(0)).toUpperCase(),b=n.slice(1,n.length),c=a+b;return c;
+	var a=(n.charAt(0)).toUpperCase(),b=n.slice(1,n.length).toLowerCase(),c=a+b;return c;
 }
 function cleaname(n){
 	var a=n.split(' '),c='',d=[];
@@ -194,20 +194,24 @@ function validate(ul,at,fnc){
 		if(!ul[i].value){
 			redtxt(at[i],('insert '+i));
 			if(vali)vali=false;
+		}else if(ul[i].type=='email'){
+			if(!ebmail(ul[i].value)){redtxt(at[i],('invalid email'));if(vali)vali=false;}
 		}
 	}
 	fnc(vali);
 }
-function resetkeys(r,am){
-	for(var i in r)if(r[i].textContent!=am[i]){r[i].textContent=am[i];r[i].style.color='';}
+function resetkeys(r,a){
+	for(var i in r)if(r[i].innerHTML!=a[i]){r[i].textContent=a[i];r[i].style.color='';}
 		
 }
 function redtxt(el,tx){
-	el.textContent=tx;el.style.color='red';
+	el.innerHTML='';
+	feedme(el,[icon('alerti'),span(tx,'ecosp','',{color:'red'})]);el.style.color='red';
 }
 function barme(t){
 	if(!t)return;
-	var k=unbar(t),s=k,a=[],x,y,cx=s.length,st='';
+	
+	var k=(typeof t=='number')?unbar(t.toString()):unbar(t),s=k,a=[],x,y,cx=s.length,st='';
 	if(s.length<4)return s;
 	for(var i=0;i<cx;i++){
 		a.unshift(s.slice(s.length-3,s.length));
@@ -235,11 +239,46 @@ function isbar(v){
 function b2a(a,b){
 	for(var i in a)if(b[i])a[i]=b[i];
 }
-
+function revar(v){
+	var a=(typeof v=='number')?v.toString():v,b=a.split(''),c=[],r='';
+	for(var i=ocn(b)-1;i>-1;i--)c.push(b[i]);
+	for(var i in c)r=r.toString()+c[i];
+	return r;
+}
 function ebmail(e){
 	//if(!)return false;
 	return (e.indexOf('@')>-1&&(e.split('@')[1].split('.'))[1])?true:false;
 }
+function isnum(d){
+	return parseInt(d);
+}
+function isfloat(n){
+	var a=n.toString();
+	if(a.indexOf('.')>-1)return true;
+	return false;
+}
+function breaktxt(t){
+	var b=ocn(t)/2,a=isfloat(b),a=[],d;
+	d=(a)?parseInt(b)+1:parseInt(b);
+	a.push(t.slice(0,d));a.push(t.slice(d,ocn(t)));
+	return a;
+}
+//uploadhook
+function hookupload(o){
+	addEvent(o.e,'change',function(){
+		
+		var reader=new FileReader();
+		
+		reader.onload=function(){
+			var bytes=new Uint8Array(this.result);
+			
+			o.fnc(bytes);
+		};
+		reader.readAsArrayBuffer(this.files[0]);
+		//clg(reader);
+	});
+}
+
 
 
 
@@ -537,8 +576,9 @@ var dropmenu=function(dr,id,bc,m,d,a){
 	}
 	return rd;
 }
-var pah=function(id,c){
+var pah=function(id,c,cl){
 	var rd=DIV(id,'page-header');if(c)feedme(rd,c);
+	if(cl)addclass(rd,cl);
 	return rd;
 }
 var input=function(id,c,at,ta){
@@ -647,8 +687,11 @@ var nav=function(cl){
 	if(cl)for(var i in cl)APP(ws,cl[i]);
 	return rd;
 }
-var flexie=function(id,ct,bt){
-	var ad=par(ct.t,'dtag','input-group-addon'),ac=DIV('taghol','inline','',[ad]),sp=par(ct.v,'flx-sp','form-control'),ip=input('flx-ip','form-control'),is=DIV('flxis-dv','inline','',[sp,ip]),b1=but([icon(bt.f)],'button',bt.f,'btn btn-link btn-md'),b2=but([icon(bt.s)],'button',bt.s,'btn btn-link btn-md'),bd=DIV('flxbut','inline','',[b1,b2]),rd=DIV(id,'input-group input-group-md flexie','',[ad,is,bd]),so='',eo={};
+//flexie(i,{t:i,v:o[i]},{f:'pencil',s:'ok'})
+var flexie=function(id,ct,bt,ag){
+	var ad=par(ct.t,'dtag','col'),sp=par(ct.v,'flx-sp','col'),ip=input('','flx-ip',ag.i),is=par([sp,ip],'flxis-dv'),b1=but([icon(bt.f)],'button',bt.f,'btn btn-link btn-lg'),b2=but([icon(bt.s)],'button',bt.s,'btn btn-link btn-lg'),bd=par([b1,b2],'flxbut',ag.c),rd=DIV(id,'input-group input-group-md flexie','',[ad,is]),so='',eo={};
+	if(bt.f)APP(rd,bd);
+	ad.style.display='inline-block';is.style.display='inline-block';bd.style.display='inline-block';
 	eo.e=rd;
 	eo.f=flipme;
 	eo.v=ip;
@@ -716,7 +759,7 @@ var phul=function(ar,ra,as){
 		v=(ra&&ra[i])?ra[i]:'';
 		k=(as&&as[i])?as[i]:'text';
 		c=input(ar[i],'form-control',{placeholder:ar[i],type:k});
-		s=span(v);
+		s=par(v,'','phat');
 		d=par([c,s],'','form-group')
 		APP(ul,d);
 		b[ar[i]]=c;
@@ -750,5 +793,14 @@ var date=function(r){
 	
 	return v;
 }
-
+var upform=function(o){
+	var o1=upa;
+}
+//filekey={e1:socketemit,e2:socketon,f2:socketonfunc,i1:rdid,bt:buttxt}
+var filekey=function(o){
+	
+}
+var fileinput=function(){
+	return input('','',upa.finp);
+}
 
