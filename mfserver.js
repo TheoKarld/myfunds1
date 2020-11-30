@@ -209,7 +209,7 @@ function addfunds(o){
 //senders
 function sendtarfix(o){
 	var tx='The individual target has been changed from '+o.o+' to '+o.t+', by '+ll[al[4]][o.g][la[6]][o.i][ma2[0]]+'.';
-	sendemail({g:o.g,m:emto(mail,'','New Individual Target',tx)});
+	send2all({g:o.g,m:emto(mail,'','New Individual Target',tx)});
 }
 function sendid(o){
 	var tx='hello '+o[ma2[0]]+'. your group name is "'+o.g+'", group security pass is "'+ll[al[4]][o.g][la[1]]+'" and your member ID is "'+o.id+'".';
