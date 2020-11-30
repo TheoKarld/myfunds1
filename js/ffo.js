@@ -55,7 +55,7 @@ function callgroup(g){
 	if(!gra[g])groupdv(g);
 	bringup(gra[g]);
 	WM=MA[3];
-	gro[gn].f1(ME)
+	gro[g].f1(ME)
 }
 function anounceme(t,fnc,v){
 	if(!ano.f1)anouncer();
@@ -197,7 +197,7 @@ var ccolbox=function(g){
 			var v1=cleaname(ul.o[a1[0]].value),v2=cleaname(ul.o[a1[1]].value),v3=ll[al[4]][GR][ga[3]],v4;
 			if(v1!=v3){redtxt(ul.a[a1[0]],v1+' is not the current '+ga[3]);val=false;return;}
 			if(!idey(v2)){redtxt(ul.a[a1[1]],v2+' is not a registered member of '+GR);val=false;return;}
-			v4={g:GR,c:v2};
+			v4={g:GR,c:v2,i:gid(GR,v2)};
 			socket.emit('fixcollector',v4);
 			socket.on('collectorfix',function(vo){
 				ll[al[4]][vo.g]=vo.go;

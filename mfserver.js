@@ -102,7 +102,7 @@ function fixcollector(o){
 	ll[al[4]][o.g][ga[4]]=ct;
 	ll[al[4]][o.g][ga[5]]=em;
 	writelog('ll');
-	
+	sendcollect(o);
 }
 function fixbio(o){
 	for(var i in o.o){
@@ -207,6 +207,10 @@ function addfunds(o){
 	sendafunds(o)
 }
 //senders
+function sendcollect(o){
+	var tx='Hello, your new group collector is '+o.c;
+	send2all({g:o.g,m:emto(mail,'','Collector Hand Over',tx)})
+}
 function sendtarfix(o){
 	var tx='The individual target has been changed from '+o.o+' to '+o.t+', by '+ll[al[4]][o.g][la[6]][o.i][ma2[0]]+'.';
 	send2all({g:o.g,m:emto(mail,'','New Individual Target',tx)});
