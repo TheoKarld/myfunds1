@@ -55,6 +55,7 @@ function callgroup(g){
 	if(!gra[g])groupdv(g);
 	bringup(gra[g]);
 	WM=MA[3];
+	gro[gn].f1(ME)
 }
 function anounceme(t,fnc,v){
 	if(!ano.f1)anouncer();
@@ -716,7 +717,6 @@ var logob=function(){
 		erw();
 		ME=mid;
 		callgroup(gn);
-		gro[gn].f1(ME);
 		
 	}
 	
