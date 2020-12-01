@@ -1,5 +1,4 @@
-var version='0.0.1',name='MyFunds',port=process.env.PORT||9999,nodemailer=require('nodemailer'),kwport = nodemailer.createTransport({host:"smtp.gmail.com",port:465,secure:true,auth:{user:"dashekarld@gmail.com",pass:"theophilus"}}),mongo=require('mongodb'),formidable=require('formidable'),MongoClient=mongo.MongoClient,uri="mongodb+srv://myfunfs:DgpArwtmZysmZTGS@cluster0.31eaj.mongodb.net",url='mongodb://127.0.0.1:27017',dbn='myfunds1',CL='',ADM='',fs=require('fs'),express=require('express'),app=express(),server=app.listen(port,calldb),io=require('socket.io')(server),path=require('path'),db='',_dirname=path.resolve(),ll='',ids=['admindl','groupob'],la=['group','security pass','individual target','collector','year','month','members','funds','backup'],mns=['January','February','March','April' ,'May','June','July','August','September','October','November','December'],ma=['available funds','loans','payments','reciever','complete'],al=['launched','organisation','year','month','groups','mid','dropout'],mea=['Name','contact','address'],loa=['reciever','amount','date','paid','date paid'],cma=['reciever','amount recieved','date recieved'],FI='',ga=['group','security pass','individual target','collector',"collector contact",'collector email','CID'],afa=['member','funds','purpose','confirmed'],ma2=['Name','Contact','Email','logs','img'],mail='dashekarld@gmail.com';
-
+var version='0.0.1',name='MyFunds',port=process.env.PORT||9999,nodemailer=require('nodemailer'),kwport = nodemailer.createTransport({host:"smtp.gmail.com",port:465,secure:true,auth:{user:"karldworldc9@gmail.com",pass:"cosmicnine"}}),mongo=require('mongodb'),formidable=require('formidable'),MongoClient=mongo.MongoClient,uri="mongodb+srv://myfunfs:DgpArwtmZysmZTGS@cluster0.31eaj.mongodb.net",url='mongodb://127.0.0.1:27017',dbn='myfunds1',CL='',ADM='',fs=require('fs'),express=require('express'),app=express(),server=app.listen(port,calldb),io=require('socket.io')(server),path=require('path'),db='',_dirname=path.resolve(),ll='',ids=['admindl','groupob'],la=['group','security pass','individual target','collector','year','month','members','funds','backup'],mns=['January','February','March','April' ,'May','June','July','August','September','October','November','December'],ma=['available funds','loans','payments','reciever','complete'],al=['launched','organisation','year','month','groups','mid','dropout'],mea=['Name','contact','address'],loa=['reciever','amount','date','paid','date paid'],cma=['reciever','amount recieved','date recieved'],FI='',ga=['group','security pass','individual target','collector',"collector contact",'collector email','CID'],afa=['member','funds','purpose','confirmed'],ma2=['Name','Contact','Email','logs','img'],mail='karldworldc9@gmail.com',self='myfunds1.herokuapp.com';
 
 
 app.use(express.static(_dirname));
@@ -62,14 +61,22 @@ var makeid=function(o){
 	n=revar(n[0].slice(ocn(n[0])-2,ocn(n[0])))+revar(n[1].slice(ocn(n[1])-2,ocn(n[1])))+d+mn;
 	return n;
 }
-var emto=function(f,t,s,m){
-	return {from:f,to:t,subject:s,text:m};
+var emto=function(f,t,s,m,h){
+	return {from:f,to:t,subject:s,html:htm('p',m)+h};
 }
 var getemails=function(g){
 	var a1=ll[al[4]][g][la[6]],a2=[];
 	for(var i in a1)a2.push(a1[i][ma2[2]]);
 	return a2;
 }
+var elink=function(o){
+	return a='<p>Click <a href="'+o.l+'">here</a> '+o.t+'</p>';
+}
+var htm=function(e,c){
+	return '<'+e+'>'+c+'</'+e+'>';
+	
+}
+
 
 
 function send2all(o){
@@ -209,29 +216,29 @@ function addfunds(o){
 //senders
 function sendcollect(o){
 	var tx='Hello, your new group collector is '+o.c;
-	send2all({g:o.g,m:emto(mail,'','Collector Hand Over',tx)})
+	send2all({g:o.g,m:emto(mail,'','Collector Hand Over',tx,elink({l:self,t:'to continue to login.'}))});
 }
 function sendtarfix(o){
 	var tx='The individual target has been changed from '+o.o+' to '+o.t+', by '+ll[al[4]][o.g][la[6]][o.i][ma2[0]]+'.';
-	send2all({g:o.g,m:emto(mail,'','New Individual Target',tx)});
+	send2all({g:o.g,m:emto(mail,'','New Individual Target',tx,elink({l:self,t:'to continue to login.'}))});
 }
 function sendid(o){
 	var tx='hello '+o[ma2[0]]+'. your group name is "'+o.g+'", group security pass is "'+ll[al[4]][o.g][la[1]]+'" and your member ID is "'+o.id+'".';
-	sendemail(emto(mail,o[ma2[2]],'Login Credentials',tx));
+	sendemail(emto(mail,o[ma2[2]],'Login Credentials',tx,elink({l:self,t:'to continue to login.'})));
 	
 }
 function sendmem(o){
 	var  tx=o[ma2[0]]+' has been added to your group.';
-	send2all({g:o.g,m:emto(mail,'','New Member Alert!!',tx)});
+	send2all({g:o.g,m:emto(mail,'','New Member Alert!!',tx,elink({l:self,t:'to continue to login.'}))});
 	
 }
 function sendafunds(o){
 	var tx=o.d[afa[0]]+' sent '+o.d[afa[1]]+' for '+o.d[afa[2]]+'. On '+date('f')+'.';
-	send2all({g:o.g,m:emto(mail,'','Added Funds.',tx)});
+	send2all({g:o.g,m:emto(mail,'','Added Funds.',tx,elink({l:self,t:'to continue to login.'}))});
 }
 function sendfcon(o){
 	var si=gid(o.g,o.m),fn=ll[al[4]][o.g][la[6]][si][ma2[3]][o.t],g=ll[al[4]][o.g],tx=g[la[6]][o.i][ma2[0]]+' has confirmed the '+fn.d[afa[1]]+' remitted by '+fn.d[afa[0]]+' for '+fn.d[afa[2]]+'. now the '+cleaname(ma[0])+' is, '+barme(g[la[7]][date('y')][mns[date('m')]][ma[0]])+'.';
-	send2all({g:o.g,m:emto(mail,'','Funds Confirmation',tx)});
+	send2all({g:o.g,m:emto(mail,'','Funds Confirmation',tx,elink({l:self,t:'to continue to login.'}))});
 }
 //
 function writelog(o){
